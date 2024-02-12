@@ -14,7 +14,6 @@
 }
 
 body{
-    /* max-width: 1660px; */
     margin: 0 auto;
     width: 100%;
     display: grid;
@@ -31,17 +30,19 @@ header{
     height:230px;
     background-repeat: no-repeat;
     position: relative;
-    /* background-color: var(--dark-cyan); */
+
 }
 main{
     max-width: 1000px;
     width: 100%;
     margin:0rem auto;
-    /* padding: 1rem; */
     position: relative;
 }
-.container > div:not(:first-child) {
-    margin-top: 2rem;
+.container{
+    margin-top: 3rem;
+}
+.container > div{
+    margin-top: 4rem;
 }
 footer{
     padding: 1rem;
@@ -67,8 +68,11 @@ h1{
     font-size: 1.1rem;
 }
 /*  */
+main.active {
+    margin-bottom: 5rem;
+}
 .job-card{
-    margin-top: 5rem;
+    margin-top: 6rem;
     width: 100%;
     height: 100%;
     padding:3rem 1.3rem 1rem;
@@ -220,14 +224,15 @@ h1{
 .job span:last-child{
     background-color: var(--dark-cyan);
 }
-.job img{
-   
-}
 main.active .job-filter{
     width: 100%;
     height: auto;
     opacity: 1;
     pointer-events:all;
+    
+}
+main.active{
+    padding-top: 3rem;
 }
 .job-filter .clear{
     background-color: transparent;

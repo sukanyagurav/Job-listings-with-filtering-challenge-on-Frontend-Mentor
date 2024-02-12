@@ -84,7 +84,6 @@ function render(data){
             ele.innerHTML=createFilters(filters)
             const clear = document.querySelector('.clear')
             clear.insertAdjacentElement( 'beforebegin',ele)
-            // console.log(filters)
             updateContainer()
         }
        
