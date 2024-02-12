@@ -1,26 +1,38 @@
+let data=[]
+const template1 = document.querySelector('#job-template')
+const container =document.querySelector('.container')
 window.addEventListener('DOMContentLoaded',async function(e){
     try{
         const res = await fetch('./data.json')
-        const data = await res.json()
+        data = await res.json()
         render(data)
+        
     }
     catch(error){
 
     }
 })
-const template1 = document.querySelector('#job-template')
-const container =document.querySelector('.container')
+
+let filters=[]
+let filteredData=[]
 
 function createList (data){
   let data2= data.map(data=>`<li>${data}</li>`).join(' ')
     return data2
 }
 function createCategories(data){
-    let data2= data.map(data=>`<li><button>${data}</button></li>`).join('')
+    let data2= data.map(data=>`<li><button id=${data}>${data}</button></li>`).join('')
     return data2
 }
-function render(data){
+function createFilters(filterData){
+    let filtersx=filterData.map(item =>`<button class="job"><span>${item}</span> <span><img src="images/icon-remove.svg" alt=""></span></button>`).join(' ')
+    return filtersx
+}
+function JobCat(){
 
+}
+
+function render(data){
    
     for(let i=0;i<data.length;i++){
         const jobTemplate = document.importNode(template1.content,true)
@@ -55,9 +67,59 @@ function render(data){
             div.innerHTML = content
             badges.appendChild(div)
         }
-
+      
         const categories = jobTemplate.querySelector('.categories')
-        categories.innerHTML = (createCategories([data[i]?.level,data[i]?.role,...data[i]?.languages,...data[i]?.tools]))
+        categories.innerHTML = createCategories([data[i]?.level,data[i]?.role,...data[i]?.languages,...data[i]?.tools])
+        
         container.appendChild(jobTemplate)
     }
+    document.querySelectorAll('.categories').forEach(category=>{
+        category.addEventListener('click',function(e){
+        if(e.target.id != ''){
+            container.parentElement.classList.add('active')
+            if(!filters.includes(e.target.id)){ 
+                filters.push(e.target.id)
+            }
+            const ele = document.querySelector('.filters')
+            ele.innerHTML=createFilters(filters)
+            const clear = document.querySelector('.clear')
+            clear.insertAdjacentElement( 'beforebegin',ele)
+            // console.log(filters)
+            updateContainer()
+        }
+       
+    })
+   
+})
+ document.querySelector('.clear').addEventListener('click',function(e){
+    document.querySelector('.filters').innerHTML=''
+    filters=[]
+    container.parentElement.classList.remove('active')
+    container.innerHTML = ''
+    render(data)
+})
+    
+}
+function updateContainer(){
+    const jobcards = document.querySelectorAll('.job-card')
+    jobcards.forEach(job=>{
+        const btns = job.querySelectorAll('button')
+        let check=[]
+        for(let i of btns){
+            check.push(i.id)
+        }
+        let include =true
+        for(let j of filters){
+            if(!check.includes(j)){
+                include = false
+            }
+        }
+        if (!include) {
+           job.classList.add('show')
+            
+          } else {
+            job.classList.remove('show')
+          }
+        
+    })
 }

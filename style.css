@@ -22,7 +22,7 @@ body{
     grid-template-rows: 230px 1fr 100px;
     min-height: 100vh;
     background-color: var(--filter-cyan);
-    /* padding: 1rem; */
+    overflow-x: hidden;
     font-family: 'League Spartan', sans-serif;
 }
 header{
@@ -30,14 +30,15 @@ header{
     background-size: 100% 100%;
     height:230px;
     background-repeat: no-repeat;
-    
+    position: relative;
     /* background-color: var(--dark-cyan); */
 }
 main{
     max-width: 1000px;
     width: 100%;
-    margin:4rem auto;
-    padding: 1rem;
+    margin:0rem auto;
+    /* padding: 1rem; */
+    position: relative;
 }
 .container > div:not(:first-child) {
     margin-top: 2rem;
@@ -67,6 +68,7 @@ h1{
 }
 /*  */
 .job-card{
+    margin-top: 5rem;
     width: 100%;
     height: 100%;
     padding:3rem 1.3rem 1rem;
@@ -74,6 +76,31 @@ h1{
     background-color: white;
     border-left: 5px solid var(--dark-cyan);
     border-radius: 5px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    position: relative;
+}
+
+.job-card.show {
+    animation: remove .5s ease-in-out forwards;
+}
+
+@keyframes remove {
+    0% {
+        position: relative;
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    90% {
+        position: relative;
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        position: absolute;
+        opacity: 0;
+    }
 }
 .company-image{
     position: absolute;
@@ -147,6 +174,73 @@ h1{
     color: var(--dark-cyan);
     border-radius: 5px;
 }
+
+/* filter div */
+.job-filter{
+    position: absolute;
+    top: -3rem;
+    z-index: 20;
+    width: 100%;
+    left: 0;
+    padding: 1.5rem 1rem;
+    background-color: white;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+.filters{
+    display: flex;
+    gap:1rem;
+    flex-wrap: wrap;
+}
+.job{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 5px;
+    background-color: var(--bg-cyan);
+    border: none;
+    overflow: hidden;
+
+}
+.job span{
+    display: inline-block;
+    padding: 0.5rem;
+    font-weight:700 ;
+    color: var(--dark-cyan);
+}
+.job span:last-child{
+    background-color: var(--dark-cyan);
+}
+.job img{
+   
+}
+main.active .job-filter{
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    pointer-events:all;
+}
+.job-filter .clear{
+    background-color: transparent;
+    color: var(--dark-cyan-2);
+    border: none;
+    font-size: 1.1rem;
+    align-self: flex-end;
+    transition: color 0.5s ease-in-out;
+    cursor: pointer;
+}
+.job-filter .clear:hover{
+    color: var(--dark-cyan);
+}
 @media screen and (min-width:850px) {
     .job-profile{
         grid-template-columns: 300px 1fr;
@@ -165,7 +259,7 @@ h1{
         display: grid;
         grid-template-columns:100px 1fr;
         align-items: center;
-    }
+           }
     .company-image{
         position: relative;
         grid-row: 1/3;
