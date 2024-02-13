@@ -85,7 +85,7 @@ main.active {
 }
 
 .job-card.show {
-    animation: remove .5s ease-in-out forwards;
+    display: none;
 }
 
 @keyframes remove {

@@ -103,13 +103,13 @@ function updateContainer(){
     const jobcards = document.querySelectorAll('.job-card')
     jobcards.forEach(job=>{
         const btns = job.querySelectorAll('button')
-        let check=[]
+        let checkInEachJobCard=[]
         for(let i of btns){
-            check.push(i.id)
+            checkInEachJobCard.push(i.id)
         }
         let include =true
-        for(let j of filters){
-            if(!check.includes(j)){
+        for(let category of filters){
+            if(!checkInEachJobCard.includes(category)){
                 include = false
             }
         }
