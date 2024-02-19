@@ -44,6 +44,7 @@ So, if a job listing is for has the following categories `Frontend, Junior, Java
 
 - Semantic HTML5 markup
 - CSS custom properties
+- HTML data attributes
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
