@@ -9,13 +9,11 @@ window.addEventListener('DOMContentLoaded',async function(e){
         
     }
     catch(error){
-
+        container.innerHTML=`<p>Oops! Something went wrong. Please try again after sometime</p>`
     }
 })
 
 let filters=[]
-let filteredData=[]
-
 function createList (data){
   let data2= data.map(data=>`<li>${data}</li>`).join(' ')
     return data2
@@ -25,12 +23,10 @@ function createCategories(data){
     return data2
 }
 function createFilters(filterData){
-    let filtersx=filterData.map(item =>`<button class="job"><span>${item}</span> <span><img src="images/icon-remove.svg" alt=""></span></button>`).join(' ')
+    let filtersx=filterData.map((item,index) =>`<button class="job" onclick='removeItem(event)'><span>${item}</span> <span class='remove' id='${item}' ><img src="images/icon-remove.svg" alt=""></span></button>`).join(' ')
     return filtersx
 }
-function JobCat(){
 
-}
 
 function render(data){
    
@@ -67,12 +63,12 @@ function render(data){
             div.innerHTML = content
             badges.appendChild(div)
         }
-      
+       //create job categories 
         const categories = jobTemplate.querySelector('.categories')
         categories.innerHTML = createCategories([data[i]?.level,data[i]?.role,...data[i]?.languages,...data[i]?.tools])
-        
         container.appendChild(jobTemplate)
     }
+    // onclick of job category add create those category in category field.
     document.querySelectorAll('.categories').forEach(category=>{
         category.addEventListener('click',function(e){
         if(e.target.id != ''){
@@ -90,6 +86,7 @@ function render(data){
     })
    
 })
+// clear all categories 
  document.querySelector('.clear').addEventListener('click',function(e){
     document.querySelector('.filters').innerHTML=''
     filters=[]
@@ -97,8 +94,25 @@ function render(data){
     container.innerHTML = ''
     render(data)
 })
-    
+
 }
+// remove each category from the category field
+function removeItem(e){
+    const removeItem = e.target.closest('.remove')
+    if(!removeItem && e.target.closest('.remove') == null) {
+        return
+    }
+    else{
+        filters= filters.filter(item=> item != removeItem.id)
+        document.querySelector('.filters').removeChild(removeItem.parentElement)
+        if(filters.length == 0){
+            container.parentElement.classList.remove('active')
+        }
+        createFilters(filters)
+        updateContainer()
+    }
+}
+// update the container
 function updateContainer(){
     const jobcards = document.querySelectorAll('.job-card')
     jobcards.forEach(job=>{

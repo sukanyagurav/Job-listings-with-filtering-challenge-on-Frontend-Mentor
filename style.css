@@ -80,32 +80,10 @@ main.active {
     background-color: white;
     border-left: 5px solid var(--dark-cyan);
     border-radius: 5px;
-    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
     position: relative;
 }
 
-.job-card.show {
-    display: none;
-}
-
-@keyframes remove {
-    0% {
-        position: relative;
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    90% {
-        position: relative;
-        opacity: 0;
-        transform: translateX(-100%);
-    }
-
-    100% {
-        position: absolute;
-        opacity: 0;
-    }
-}
 .company-image{
     position: absolute;
     top: -2rem;
@@ -129,9 +107,7 @@ main.active {
     font-weight: 700;
 }
 .new{
-   
     background-color: var(--dark-cyan);
-  
 }
 .featured{
     margin-left: 0.5rem;
@@ -280,4 +256,28 @@ main.active{
     .categories{
         flex-wrap: nowrap;
     }
+}
+.job-card{
+    animation: text-clip 0.8s 0.3s cubic-bezier(0.5, 0, 0.1, 1) both;
+}
+.job-card.show{
+   
+    animation: text-clip2 0.8s  cubic-bezier(0.5, 0, 0.1, 1) both;
+}
+@keyframes text-clip {
+    from {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+    }
+    to {
+        clip-path: polygon(0 0, 150% -562%, 100% 100%, 0% 100%);
+     } 
+}
+
+@keyframes text-clip2 {
+    from {
+        clip-path: polygon(0 0, 150% 0, 150% 150%, 0% 150%); }
+    to {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+        display: none;
+    } 
 }
