@@ -285,14 +285,15 @@ main.active{
         clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
     }
     to {
-        clip-path: polygon(0 0, 150% -562%, 100% 100%, 0% 100%);
+        clip-path: polygon(0 0, 205% -562%, 223% 188%, 0% 161%);
      } 
 }
 
 @keyframes text-clip2 {
     from {
-        clip-path: polygon(0 0, 150% 0, 150% 150%, 0% 150%); }
+        clip-path: polygon(0 0, 205% -562%, 223% 188%, 0% 161%);}
     to {
+        
         clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
         display: none;
     } 
