@@ -122,6 +122,12 @@ main.active {
 }
 .job-profile h2{
     font-size: 19px;
+    cursor: pointer;
+    color:var(--dark-cyan-3);
+    transition: all 0.5s ease-in-out;
+}
+.job-profile h2:hover{
+    color: var(--dark-cyan) !important;
 }
 .categories{
     grid-row: 3/4;
@@ -153,8 +159,12 @@ main.active {
     font-family: inherit;
     color: var(--dark-cyan);
     border-radius: 5px;
+    transition: all 0.5s ease-in-out;
 }
-
+.categories button:hover{
+    background-color: var(--dark-cyan);
+    color: var(--bg-cyan);
+}
 /* filter div */
 .job-filter{
     position: absolute;
@@ -189,7 +199,7 @@ main.active {
     background-color: var(--bg-cyan);
     border: none;
     overflow: hidden;
-
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 .job span{
     display: inline-block;
@@ -199,6 +209,10 @@ main.active {
 }
 .job span:last-child{
     background-color: var(--dark-cyan);
+    transition: all 0.5s ease-in-out;
+}
+.job span:last-child:hover{
+    background-color: var(--dark-cyan-3);
 }
 main.active .job-filter{
     width: 100%;
