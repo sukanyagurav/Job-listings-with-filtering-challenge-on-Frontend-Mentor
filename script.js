@@ -23,7 +23,7 @@ function createCategories(data){
     return data2
 }
 function createFilters(filterData){
-    let filtersx=filterData.map((item,index) =>`<button class="job" onclick='removeItem(event)'><span>${item}</span> <span class='remove' id='${item}' ><img src="images/icon-remove.svg" alt=""></span></button>`).join(' ')
+    let filtersx=filterData.map((item,index) =>`<button class="job" onclick='removeItem(event)'><span>${item}</span> <span class='remove' data-item='${item}' ><img src="images/icon-remove.svg" alt=""></span></button>`).join(' ')
     return filtersx
 }
 
@@ -103,7 +103,9 @@ function removeItem(e){
         return
     }
     else{
-        filters= filters.filter(item=> item != removeItem.id)
+
+        const removeAtrribute = removeItem.getAttribute('data-item')
+        filters= filters.filter(item=> item != removeAtrribute)
         document.querySelector('.filters').removeChild(removeItem.parentElement)
         if(filters.length == 0){
             container.parentElement.classList.remove('active')
