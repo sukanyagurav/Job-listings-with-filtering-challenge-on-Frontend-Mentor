@@ -19,7 +19,7 @@ function createList (data){
     return data2
 }
 function createCategories(data){
-    let data2= data.map(data=>`<li><button id=${data}>${data}</button></li>`).join('')
+    let data2= data.map(data=>`<li><button data-category='${data}'>${data}</button></li>`).join('')
     return data2
 }
 function createFilters(filterData){
@@ -71,10 +71,10 @@ function render(data){
     // onclick of job category add create those category in category field.
     document.querySelectorAll('.categories').forEach(category=>{
         category.addEventListener('click',function(e){
-        if(e.target.id != ''){
+        if(e.target.getAttribute('data-category') != ''){
             container.parentElement.classList.add('active')
-            if(!filters.includes(e.target.id)){ 
-                filters.push(e.target.id)
+            if(!filters.includes(e.target.getAttribute('data-category'))){ 
+                filters.push(e.target.getAttribute('data-category'))
             }
             const ele = document.querySelector('.filters')
             ele.innerHTML=createFilters(filters)
@@ -121,7 +121,8 @@ function updateContainer(){
         const btns = job.querySelectorAll('button')
         let checkInEachJobCard=[]
         for(let i of btns){
-            checkInEachJobCard.push(i.id)
+            category = i.getAttribute('data-category')
+            checkInEachJobCard.push(category)
         }
         let include =true
         for(let category of filters){
